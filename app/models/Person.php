@@ -1,5 +1,5 @@
 <?php
-	class Kunde {
+	class Person {
 		public $id;
 		public $name;
 		public $vorname;
@@ -18,6 +18,15 @@
 			$this->hausnummer = $hausnummer;
 			$this->passwort = $passwort;
 			$this->ortId = $ortId;
+		}
+
+		public function login($vorname, $name, $passwort)
+		{
+	    	$personen = $db->quey('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name.' AND person.passwort == '.$passwort);
+	    	foreach ($personen as $row) {
+	    		return new Person($row['id'], $row['vorname'], $row['strasse']. $row['hausnummer'], $row['geburtsdatum'], $row['passwort'], $row['ortId']);
+	    	}
+	    	return false;
 		}
 	}
 ?>

@@ -10,7 +10,15 @@
     }
 
     public function postLogin() {
-    	
+    	$db = Db::getInstance();
+    	if(isset($_POST['vorname']) && isset($_POST['name']) && isset($_POST['passwort']))
+    	{
+    		$vorname = $_POST['vorname'];
+    		$name = $_POST['name'];
+    		$passwort = $_POST['passwort'];
+    	}
+
+
     }
   }
 ?>
