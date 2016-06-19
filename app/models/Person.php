@@ -23,7 +23,7 @@
 		public static function login($vorname, $name, $passwort)
 		{
 			$db = Db::getInstance();
-	    	$row = $db->query('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name.' AND person.passwort == '.crypt($passwort));
+	    	$row = $db->query('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name.' AND person.passwort == '.password_hash($passwort, PASSWORD_DEFAULT));
 	    	if($row != null) {
 	    		return new Person($row['id'], $row['vorname'], $row['strasse']. $row['hausnummer'], $row['geburtsdatum'], $row['passwort'], $row['ortId']);
 	    	}
