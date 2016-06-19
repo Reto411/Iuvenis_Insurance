@@ -20,12 +20,16 @@
 			$this->ortId = $ortId;
 		}
 
-		public function login($vorname, $name, $passwort)
+		public static function login($vorname, $name, $passwort)
 		{
-	    	$personen = $db->quey('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name.' AND person.passwort == '.$passwort);
-	    	foreach ($personen as $row) {
+			$db = Db::getInstance();
+	    	$personen = $db->quey('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name.' AND person.passwort == '.crypt($passwort));
+	    	foreach ($personen[0] as $row) {
+	    		return "Hello";
 	    		return new Person($row['id'], $row['vorname'], $row['strasse']. $row['hausnummer'], $row['geburtsdatum'], $row['passwort'], $row['ortId']);
+
 	    	}
+	    	return "World";
 	    	return false;
 		}
 	}

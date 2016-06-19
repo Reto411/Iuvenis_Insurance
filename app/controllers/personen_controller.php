@@ -10,15 +10,15 @@
     }
 
     public function postLogin() {
-    	$db = Db::getInstance();
+
     	if(isset($_POST['vorname']) && isset($_POST['name']) && isset($_POST['passwort']))
     	{
+    		require_once('app/models/person.php');
     		$vorname = $_POST['vorname'];
     		$name = $_POST['name'];
     		$passwort = $_POST['passwort'];
+    		$person = Person::login($vorname, $name, $passwort);
     	}
-
-
     }
   }
 ?>
