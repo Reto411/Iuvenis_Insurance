@@ -8,7 +8,7 @@
 
   else {
     $controller = 'pages';
-    $action     = 'home';
+    $action     = 'index';
   }
 
   require_once('app/views/layout.php');
