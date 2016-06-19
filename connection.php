@@ -11,7 +11,7 @@
 				// create db connection
 				$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 				
-				self::$instance = new PDO('odbc:MYSQLSERVER', 'root', '');
+				self::$instance = new PDO('mysql:MYSQLSERVER', 'root', '');
 			}
 			return self::$instance;
 		}

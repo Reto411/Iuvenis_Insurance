@@ -23,13 +23,10 @@
 		public static function login($vorname, $name, $passwort)
 		{
 			$db = Db::getInstance();
-	    	$personen = $db->quey('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name.' AND person.passwort == '.crypt($passwort));
-	    	foreach ($personen[0] as $row) {
-	    		return "Hello";
+	    	$row = $db->query('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name.' AND person.passwort == '.crypt($passwort));
+	    	if($row != null) {
 	    		return new Person($row['id'], $row['vorname'], $row['strasse']. $row['hausnummer'], $row['geburtsdatum'], $row['passwort'], $row['ortId']);
-
 	    	}
-	    	return "World";
 	    	return false;
 		}
 	}
