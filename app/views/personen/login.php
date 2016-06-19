@@ -1,4 +1,4 @@
-Logen Sie sich ein:
+Loggen Sie sich ein:
 <p style="color:red;">
 <?php echo $validation_error; ?>
 </p>

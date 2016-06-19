@@ -8,6 +8,7 @@
 		public $geburtsdatum;
 		public $passwort;
 		public $ortId;
+		public $email;
 
 		public function __construct($id, $name, $vorname, $strasse, $hausnummer, $geburtsdatum, $passwort, $email,$ortId)
 		{
@@ -24,7 +25,7 @@
 		public static function login($vorname, $name, $passwort)
 		{
 			$db = Db::getInstance();
-	    	$row = $db->query('SELECT * from peron WHERE person.vorname == '. $vorname .' AND person.name == '. $name);
+	    	$row = $db->query('SELECT * from person WHERE person.vorname == '. $vorname .' AND person.name == '. $name);
 	    	if($row != null) {
     			// verify password
     			if(dump(password_verify($row['passwort'], row['passwort'])))
