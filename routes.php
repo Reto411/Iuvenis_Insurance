@@ -8,9 +8,6 @@
       case 'pages':
         $controller = new PagesController();
       break;
-      default:
-        $controller = new PagesController();
-      break;
     }
 
     // call the action
