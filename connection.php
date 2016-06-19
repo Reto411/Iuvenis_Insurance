@@ -10,7 +10,7 @@
 			if(!isset(self::$instance)) {
 				// create db connection
 				$pdo_options[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-				self::$instance = new PDO('odbc:host=localhost;dbname=iuvenis_insurance', root, '', $pdo_options);
+				self::$instance = new PDO('odbc:MYSQLSERVER', root, '', $pdo_options);
 			}
 			return self::$instance;
 		}
