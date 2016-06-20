@@ -23,6 +23,13 @@
 
 			$db = Db::getInstance();
 
+			$options = [
+    			'cost' => 11,
+    			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+			];
+
+			$passworthash = password_hash( $passwort, PASSWORD_BCRYPT, $options );
+
 			//Insert into Person Tabelle:
 			$sql = 'INSERT INTO `person` ( `Name`, `Vorname`, `Strasse`, `Hausnummer`, `Geburtsdatum`, `OrtId`, `Passwort`, `Email`) 
 					VALUES ( :name, :vorname, :strasse, :hausnummer, :geburtsdatum, :ortid, :passwort, :email)';
@@ -35,7 +42,7 @@
 			$stmt->bindParam(':hausnummer', $hausnummer, PDO::PARAM_STR);
 			$stmt->bindParam(':geburtsdatum', $geburtsdatum, PDO::PARAM_STR);
 			$stmt->bindParam(':ortid', $ortId, PDO::PARAM_STR);
-			$stmt->bindParam(':passwort', $passwort, PDO::PARAM_STR);
+			$stmt->bindParam(':passwort', $passworthash, PDO::PARAM_STR);
 			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
 
 			$stmt->execute();
@@ -61,7 +68,6 @@
 			$stb->bindParam(':datum', $pführerscheindatum, PDO::PARAM_STR);
 			$stb->bindParam(':personid', $personid, PDO::PARAM_STR);
 
-			echo $pkundennummer . ' ' . $pführerscheindatum . ' ' . $personid;
 			$stb->execute();
 
 			echo '<p>Kunde erfolgreich erstellt!</p>';

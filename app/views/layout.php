@@ -5,7 +5,20 @@
   <body>
     <header>
       <a href='/iuvenis_insurance'>Home</a>
-      <a href='/iuvenis_insurance/?controller=kunden&action=index'>Kunden</a>
+      <?php
+      if (isset($_SESSION['person']) && isset($_SESSION['rolle'])) {
+        ?>
+          <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Profil</a>
+          <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Versicherungsverträge</a>
+          <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Schadensfälle</a>
+        <?php
+        if ($_SESSION['rolle'] == 'Mitarbeiter') {
+          ?>
+            <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Administration</a>
+          <?php
+        }
+      }
+      ?>
     </header>
 
     <?php require_once('routes.php'); ?>

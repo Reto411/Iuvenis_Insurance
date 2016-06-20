@@ -7,15 +7,17 @@
 	<label>Vorname: </label><input type="text" name="vorname"><br/>
 	<label>Nachname: </label><input type="text" name="name"><br/>
 	<label>Email: </label><input type="text" name="email"><br/>
+	<label>Passwort: </label><input type="password" name="passwort1"><br/>
+	<label>Passwort: </label><input type="password" name="passwort2"><br/>
 	<label>Strasse: </label><input type="text" name="strasse"><br/>
 	<label>Hausnummer: </label><input type="text" name="hausnummer"><br/>
 	<label>Geburtsdatum: </label><input type="text" name="geburtsdatum"><br/>
 	<label>Führerscheindatum: </label><input type="text" name="führerscheindatum"><br/>
 	<label>Ort: </label><select name="ort">
 		<?php 
-			foreach ($orte as $ort => $id) {
+			foreach ($orte as $ort) {
 				?>
-				<option value="<?php echo $id; ?>"><?php echo $ort; ?></option>
+				<option value="<?php echo $ort['Id']; ?>"><?php echo $ort['Bezeichnung']; ?></option>
 				<?php
 			}
 		?>

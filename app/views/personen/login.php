@@ -3,8 +3,9 @@ Loggen Sie sich ein:
 <?php echo $validation_error; ?>
 </p>
 <form method="POST">
-	<label>Vorname: </label><input type="text" name="vorname"><br/>
-	<label>Nachname: </label><input type="text" name="name"><br/>
+	<label>Email: </label><input type="text" name="email"><br/>
 	<label>Password: </label><input type="password" name="passwort"><br/>
 	<button type="submit">Login</button>
 </form>
+
+<a href='/iuvenis_insurance/?controller=kunden&action=registrieren'>Kunden</a>

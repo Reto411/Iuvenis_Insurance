@@ -22,7 +22,7 @@
 
   // just a list of the controllers we have and their actions
   // we consider those "allowed" values
-  $controllers = array('pages' => ['index', 'error'], 'kunden' => ['index'], 'personen' => ['login']);
+  $controllers = array('pages' => ['index', 'error'], 'kunden' => ['registrieren'], 'personen' => ['login']);
 
   // check that the requested controller and action are both allowed
   // if someone tries to access something else he will be redirected to the error action of the pages controller
