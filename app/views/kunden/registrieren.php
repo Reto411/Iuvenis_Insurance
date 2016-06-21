@@ -23,5 +23,5 @@
 		?>
 	</select><br/>
 
-	<button type="submit">Erstellen</button>
+	<button class="btn btn-primary" type="submit">Erstellen</button>
 </form>

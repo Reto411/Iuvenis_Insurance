@@ -5,7 +5,8 @@ Loggen Sie sich ein:
 <form method="POST">
 	<label>Email: </label><input type="text" name="email"><br/>
 	<label>Password: </label><input type="password" name="passwort"><br/>
-	<button type="submit">Login</button>
+	<br/>
+	<button class="btn btn-primary" type="submit">Login</button>
 </form>
 
 <a href='/iuvenis_insurance/?controller=kunden&action=registrieren'>Registrieren</a>
