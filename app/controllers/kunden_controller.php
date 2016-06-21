@@ -33,6 +33,7 @@
 
 		public function postKunde(){
 			$validation_error = "";
+			require_once('app/models/ort.php');
 	    	if(	isset($_POST['vorname']) && $_POST["vorname"] != "" && 
 	    		isset($_POST['name']) && $_POST["name"] != "" && 
 	    		isset($_POST['email']) && $_POST["email"] != "" &&
@@ -42,8 +43,7 @@
 	    		isset($_POST['hausnummer']) && $_POST["hausnummer"] != "" &&
 	    		isset($_POST['geburtsdatum']) && $_POST["geburtsdatum"] != "" &&
 	    		isset($_POST['ort']) && $_POST["ort"] != "" &&
-	    		isset($_POST['kundennummer']) && $_POST["kundennummer"] != "" &&
-	    		isset($_POST['führerscheindatum']) && $_POST["führerscheindatum"] != "")
+	    		isset($_POST['kundennummer']) && $_POST["kundennummer"] != "" )
 	    	{
 	    		require_once('app/models/person.php');
 	        	require_once('app/models/kunde.php');
@@ -62,25 +62,64 @@
 
 	    		if ($passwort1 == $passwort2) {
 	    			if (!Person::checkEmailExists($email)) {
-	    				Kunde::createKunde($name, $vorname, $strasse, $hausnummer, $geburtsdatum, $passwort1, $ortId, $email, $kundennummer, $führerscheindatum);
+	    				if (is_int(intval($kundennummer))) {
+	    					if (!Kunde::checkKundennummerExists($kundennummer)) {
+	    						if ($this->validateDate($geburtsdatum)) {
+	    							if ($führerscheindatum != "") {
+	    								if (validateDate($führerscheindatum)) {
+	    									Kunde::createKunde($name, $vorname, $strasse, $hausnummer, $geburtsdatum, $passwort1, $ortId, $email, $kundennummer, $führerscheindatum);
+	    								}
+	    								else{
+	    									$validation_error .= "Das eingegebene Führerscheinsdatum ist ungültig.";
+	    									$orte = Ort::getOrte();
+	    									require_once('app/views/kunden/registrieren.php');
+	    								}
+	    							}
+	    							else{
+	    								Kunde::createKunde($name, $vorname, $strasse, $hausnummer, $geburtsdatum, $passwort1, $ortId, $email, $kundennummer, $führerscheindatum);
+	    							}	
+	    						}
+	    						else{
+	    							$validation_error .= "Das eingegebene Geburtsdatum ist ungültig.";
+	    							$orte = Ort::getOrte();
+	    							require_once('app/views/kunden/registrieren.php');
+	    						}					
+	    					}
+	    					else{
+	    						$validation_error .= "Diese Kundennummer wird bereits benutzt! Bitte wählen Sie eine Andere.";
+	    						$orte = Ort::getOrte();
+	    						require_once('app/views/kunden/registrieren.php');
+	    					}
+	    				}
+	    				else{
+	    					$validation_error .= "Die Kundennummer hat ein ungültiges Format! Bitte geben Sie eine Zahl ein.";
+	    					$orte = Ort::getOrte();
+	    					require_once('app/views/kunden/registrieren.php');
+	    				}
 	    			}
 	    			else{
 	    				$validation_error .= "Diese Email-Adresse wird bereits benutzt! Bitte wählen Sie eine Andere.";
-	    				$orte = $this->getOrte();
+	    				$orte = Ort::getOrte();
 	    				require_once('app/views/kunden/registrieren.php');
 	    			}		    		    			
 	    		}
 	    		else{
 	    			$validation_error .= "Die Passwörter stimmen nicht überein!";
-	    			$orte = $this->getOrte();
+	    			$orte = Oer::getOrte();
 	    			require_once('app/views/kunden/registrieren.php');	    			
 	    		}
 	    	}
 	    	else {
-	    		$validation_error .= "Es müssen alle Felder ausgefüllt sein";
-	    		$orte = $this->getOrte();
+	    		$validation_error .= "Es müssen alle Felder mit Stern ausgefüllt sein";
+	    		$orte = Ort::getOrte();
 	    		require_once('app/views/kunden/registrieren.php');
 	    	}
+		}
+
+		public function validateDate($date)
+		{
+		    $d = DateTime::createFromFormat('Y-m-d', $date);
+		    return $d && $d->format('Y-m-d') === $date;
 		}
 	}
 ?>

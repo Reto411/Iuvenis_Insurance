@@ -71,7 +71,28 @@
 			$stb->execute();
 
 			echo '<p>Kunde erfolgreich erstellt!</p>';
-			require_once('app/views/pages/home.php');
+			require_once('app/views/personen/login.php');
+		}
+
+		public function checkKundennummerExists($kundennummer){
+			$db = Db::getInstance();
+
+			$sql = 'SELECT count(*) FROM `Kunde` WHERE kundennummer = :kundennummer';
+
+			$sts = $db->prepare($sql);
+
+			$sts->bindParam(':kundennummer', $kundennummer, PDO::PARAM_STR);
+
+			$sts->execute();
+
+			$number_of_rows = $sts->fetchColumn();
+
+			if ($number_of_rows < 1) {
+				return FALSE;
+			}
+			else{
+				return TRUE;
+			}
 		}
 	}
 ?>
