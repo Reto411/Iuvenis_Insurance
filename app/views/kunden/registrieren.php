@@ -1,9 +1,11 @@
-<p>Erstellen Sie einen Kunden:</p>
-<p style="color:red;">
-<?php echo $validation_error; ?>
-</p>
+
 <dir class="row">
+<div class="col-md-1"></div>
 <form  class="col-md-2" method="POST">
+	<p>Erstellen Sie einen Kunden:</p>
+	<p style="color:red;">
+	<?php echo $validation_error; ?>
+	</p>
 	<div class="form-group">
 		<label>*Kundennummer: </label><input class="form-control" type="text" name="kundennummer">
 	</div>

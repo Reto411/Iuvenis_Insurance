@@ -56,6 +56,7 @@
             <?php require_once('routes.php'); ?>
             <hr />
             <dir class="row">
+            <div class="col-md-1"></div>
             <footer>
                 <p>&copy; 2016 - Iuvenis Insurance</p>
             </footer>
