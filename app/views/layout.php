@@ -9,7 +9,7 @@
       if (isset($_SESSION['person']) && isset($_SESSION['rolle'])) {
         ?>
           <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Profil</a>
-          <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Versicherungsverträge</a>
+          <a href='/iuvenis_insurance/?controller=vertrag&action=index'>Versicherungsverträge</a>
           <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Schadensfälle</a>
         <?php
         if ($_SESSION['rolle'] == 'Mitarbeiter') {
@@ -20,9 +20,9 @@
       }
       ?>
     </header>
-
+    <br/>
     <?php require_once('routes.php'); ?>
-
+    <br/>
     <footer>
       Copyright by iuvenis
     </footer>
