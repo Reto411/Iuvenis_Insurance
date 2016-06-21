@@ -22,57 +22,69 @@
 		public static function createKunde($name, $vorname, $strasse, $hausnummer, $geburtsdatum, $passwort, $ortId, $email, $pkundennummer, $pführerscheindatum){
 
 			$db = Db::getInstance();
+			try 
+			{
+  				$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			$options = [
-    			'cost' => 11,
-    			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
-			];
+				$db->beginTransaction();
 
-			$passworthash = password_hash( $passwort, PASSWORD_BCRYPT, $options );
+				$options = [
+	    			'cost' => 11,
+	    			'salt' => mcrypt_create_iv(22, MCRYPT_DEV_URANDOM),
+				];
 
-			//Insert into Person Tabelle:
-			$sql = 'INSERT INTO `person` ( `Name`, `Vorname`, `Strasse`, `Hausnummer`, `Geburtsdatum`, `OrtId`, `Passwort`, `Email`) 
-					VALUES ( :name, :vorname, :strasse, :hausnummer, :geburtsdatum, :ortid, :passwort, :email)';
+				$passworthash = password_hash( $passwort, PASSWORD_BCRYPT, $options );
 
-			$stmt = $db->prepare($sql);
+				//Insert into Person Tabelle:
+				$sql = 'INSERT INTO `person` ( `Name`, `Vorname`, `Strasse`, `Hausnummer`, `Geburtsdatum`, `OrtId`, `Passwort`, `Email`) 
+						VALUES ( :name, :vorname, :strasse, :hausnummer, :geburtsdatum, :ortid, :passwort, :email)';
 
-			$stmt->bindParam(':name', $name, PDO::PARAM_STR);
-			$stmt->bindParam(':vorname', $vorname, PDO::PARAM_STR);
-			$stmt->bindParam(':strasse', $strasse, PDO::PARAM_STR);
-			$stmt->bindParam(':hausnummer', $hausnummer, PDO::PARAM_STR);
-			$stmt->bindParam(':geburtsdatum', $geburtsdatum, PDO::PARAM_STR);
-			$stmt->bindParam(':ortid', $ortId, PDO::PARAM_STR);
-			$stmt->bindParam(':passwort', $passworthash, PDO::PARAM_STR);
-			$stmt->bindParam(':email', $email, PDO::PARAM_STR);
+				$std = $db->prepare($sql);
 
-			$stmt->execute();
+				$std->bindParam(':name', $name, PDO::PARAM_STR);
+				$std->bindParam(':vorname', $vorname, PDO::PARAM_STR);
+				$std->bindParam(':strasse', $strasse, PDO::PARAM_STR);
+				$std->bindParam(':hausnummer', $hausnummer, PDO::PARAM_STR);
+				$std->bindParam(':geburtsdatum', $geburtsdatum, PDO::PARAM_STR);
+				$std->bindParam(':ortid', $ortId, PDO::PARAM_STR);
+				$std->bindParam(':passwort', $passworthash, PDO::PARAM_STR);
+				$std->bindParam(':email', $email, PDO::PARAM_STR);
 
-			//PersonId von gerade erstellten Person holen
-			$sql = 'SELECT id FROM person WHERE email = :email';
+				$std->execute();
 
-			$std = $db->prepare($sql);
+				//PersonId von gerade erstellten Person holen
+				$sql = 'SELECT id FROM person WHERE email = :email';
 
-			$std->bindParam('email', $email, PDO::PARAM_STR);
+				$std = $db->prepare($sql);
 
-			$std->execute();
+				$std->bindParam('email', $email, PDO::PARAM_STR);
 
-			$row = $std->fetch();
-			$personid = intval($row['id']);
+				$std->execute();
 
-			//Insert into Kunde Tabelle mit FK von vorherigem Select
-			$sql = 'INSERT INTO `kunde` ( `Kundennummer`, `Führerscheinsdatum`, `PersonId`) VALUES ( :nummer, :datum, :personid)';
+				$row = $std->fetch();
+				$personid = intval($row['id']);
 
-			$stb = $db->prepare($sql);
+				//Insert into Kunde Tabelle mit FK von vorherigem Select
+				$sql = 'INSERT INTO `kunde` ( `Kundennummer`, `Führerscheinsdatum`, `PersonId`) VALUES ( :nummer, :datum, :personid)';
 
-			$stb->bindParam(':nummer', $pkundennummer, PDO::PARAM_STR);
-			$stb->bindParam(':datum', $pführerscheindatum, PDO::PARAM_STR);
-			$stb->bindParam(':personid', $personid, PDO::PARAM_STR);
+				$std = $db->prepare($sql);
 
-			$stb->execute();
+				$std->bindParam(':nummer', $pkundennummer, PDO::PARAM_STR);
+				$std->bindParam(':datum', $pführerscheindatum, PDO::PARAM_STR);
+				$std->bindParam(':personid', $personid, PDO::PARAM_STR);
 
-			echo '<p>Kunde erfolgreich erstellt!</p>';
-			$page = $_SERVER['PHP_SELF'];
-			header("Refresh: 0; url=$page");
+				$std->execute();
+
+				$db->commit();
+
+				echo '<p>Kunde erfolgreich erstellt!</p>';
+				$page = $_SERVER['PHP_SELF'];
+				header("Refresh: 0; url=$page");  
+			} 
+			catch (Exception $e) {
+				  $db->rollBack();
+				  echo "Failed: " . $e->getMessage();
+			}
 		}
 
 		public function checkKundennummerExists($kundennummer){
