@@ -31,7 +31,7 @@
 		<label>*Hausnummer: </label><input class="form-control" type="text" name="hausnummer">
 	</div>
 	<div class="form-group"><label>*Geburtsdatum (YYYY-MM-DD): </label><input class="form-control" type="text" name="geburtsdatum"></div>
-	<div class="form-group"><label>Führerscheindatum: </label><input class="form-control" type="text" name="führerscheindatum"></div>
+	<div class="form-group"><label>Führerscheindatum (YYYY-MM-DD): </label><input class="form-control" type="text" name="führerscheindatum"></div>
 	<div class="form-group"><label>*Ort: </label><select class="form-control" name="ort">
 		<?php 
 			foreach ($orte as $ort) {
