@@ -39,7 +39,7 @@
                                 <?php
                               }
                               ?>
-                              <form method="POST">
+                              <form class="navbar-form navbar-right" method="POST">
                                 <button type="submit">Logout</button>
                               </form>
                               <?php
