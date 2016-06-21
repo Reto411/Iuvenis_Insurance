@@ -40,7 +40,7 @@
                               }
                               ?>
                               <form class="navbar-form navbar-right" method="POST">
-                                <button type="submit">Logout</button>
+                                <button class="btn btn-success" type="submit">Logout</button>
                               </form>
                               <?php
                             }
