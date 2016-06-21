@@ -55,9 +55,11 @@
             <hr/>
             <?php require_once('routes.php'); ?>
             <hr />
+            <dir class="row">
             <footer>
                 <p>&copy; 2016 - Iuvenis Insurance</p>
             </footer>
+            </dir>
       </div>
 
       <script src="iuvenis_insurance/public/js/jquery-1.10.2.js"></script>

@@ -2,18 +2,35 @@
 <p style="color:red;">
 <?php echo $validation_error; ?>
 </p>
-<form method="POST">
-	<label>*Kundennummer: </label><input type="text" name="kundennummer"><br/>
-	<label>*Vorname: </label><input type="text" name="vorname"><br/>
-	<label>*Nachname: </label><input type="text" name="name"><br/>
-	<label>*Email: </label><input type="text" name="email"><br/>
-	<label>*Passwort: </label><input type="password" name="passwort1"><br/>
-	<label>*Passwort wiederholen: </label><input type="password" name="passwort2"><br/>
-	<label>*Strasse: </label><input type="text" name="strasse"><br/>
-	<label>*Hausnummer: </label><input type="text" name="hausnummer"><br/>
-	<label>*Geburtsdatum: </label><input type="text" name="geburtsdatum"><br/>
-	<label>Führerscheindatum: </label><input type="text" name="führerscheindatum"><br/>
-	<label>*Ort: </label><select name="ort">
+<dir class="row">
+<form  class="col-md-2" method="POST">
+	<div class="form-group">
+		<label>*Kundennummer: </label><input class="form-control" type="text" name="kundennummer">
+	</div>
+	<div class="form-group">
+		<label>*Vorname: </label><input class="form-control" type="text" name="vorname">
+	</div>
+	<div class="form-group">
+		<label>*Nachname: </label><input class="form-control" type="text" name="name">
+	</div>
+	<div class="form-group">
+		<label>*Email: </label><input class="form-control" type="text" name="email">
+	</div>
+	<div class="form-group">
+		<label>*Passwort: </label><input class="form-control" type="password" name="passwort1">
+	</div>
+	<div class="form-group">
+		<label>*Passwort wiederholen: </label><input class="form-control" type="password" name="passwort2">
+	</div>
+	<div class="form-group">
+		<label>*Strasse: </label><input class="form-control" type="text" name="strasse">
+	</div>
+	<div class="form-group">
+		<label>*Hausnummer: </label><input class="form-control" type="text" name="hausnummer">
+	</div>
+	<div class="form-group"><label>*Geburtsdatum (YYYY-MM-DD): </label><input class="form-control" type="text" name="geburtsdatum"></div>
+	<div class="form-group"><label>Führerscheindatum: </label><input class="form-control" type="text" name="führerscheindatum"></div>
+	<div class="form-group"><label>*Ort: </label><select class="form-control" name="ort">
 		<?php 
 			foreach ($orte as $ort) {
 				?>
@@ -21,7 +38,8 @@
 				<?php
 			}
 		?>
-	</select><br/>
+	</select><br/></div>
 
 	<button class="btn btn-primary" type="submit">Erstellen</button>
 </form>
+</dir>
