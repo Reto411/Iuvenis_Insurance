@@ -28,7 +28,8 @@
                 else{
                     $_SESSION['person'] = serialize($person);
                     $_SESSION['rolle'] = Person::getRolle($person->id);
-                    require_once('app/views/pages/home.php');
+                    $page = $_SERVER['PHP_SELF'];
+                    header("Refresh: 0; url=$page");
                 }
             }
     		else{

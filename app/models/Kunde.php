@@ -71,7 +71,8 @@
 			$stb->execute();
 
 			echo '<p>Kunde erfolgreich erstellt!</p>';
-			require_once('app/views/personen/login.php');
+			$page = $_SERVER['PHP_SELF'];
+			header("Refresh: 0; url=$page");
 		}
 
 		public function checkKundennummerExists($kundennummer){

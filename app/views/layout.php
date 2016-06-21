@@ -17,6 +17,11 @@
             <a href='/iuvenis_insurance/<?php //?controller=kunden&action=registrieren ?>'>Administration</a>
           <?php
         }
+        ?>
+        <form method="POST">
+          <button type="submit">Logout</button>
+        </form>
+        <?php
       }
       ?>
     </header>
